@@ -1,0 +1,245 @@
+{
+  "name": "trouble-shot",
+  "displayName": "trouble shot",
+  "description": "make trouble shooting docs easily",
+  "version": "0.1.0",
+  "publisher": "wjdtmfgh",
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "icon": "assets/trous_favicon_origin.png",
+  "activationEvents": [
+    "onView:trouble-shot"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsWelcome": [
+      {
+        "view": "login-to-trouble-shot",
+        "contents": "Login to Trouble shot\n[Log in](command:login.trouble.shot)"
+      },
+      {
+        "view": "my-trouble-list-without-login",
+        "contents": "No Trouble shooting found\n[Create New Trouble](command:create.trouble)"
+      },
+      {
+        "view": "my-trouble-list",
+        "contents": "No Trouble shooting found\n[Create New Trouble](command:create.trouble)"
+      },
+      {
+        "view": "node-dependencies",
+        "contents": "No nodeDependencies found"
+      },
+      {
+        "view": "error-history",
+        "contents": "No Error History found"
+      },
+      {
+        "view": "more-info",
+        "contents": "Our website\n[Visit Trouble Shot Web Site](http://orientalsalad.kro.kr/)\nMade by Oriental Salad Team - SEULHO JEONG"
+      }
+    ],
+    "commands": [
+      {
+        "command": "copy.markdown",
+        "title": "Copy Markdown",
+        "icon": "assets/copy.png"
+      },
+      {
+        "command": "login.trouble.shot",
+        "title": "Login to Trouble Shot"
+      },
+      {
+        "command": "logout.trouble.shot",
+        "title": "Logout from Trouble Shot",
+        "icon": "assets/logout.png"
+      },
+      {
+        "command": "solve.trouble",
+        "title": "Solve trouble",
+        "icon": "assets/solved.png"
+      },
+      {
+        "command": "create.trouble",
+        "title": "Trouble Shot : Create Trouble",
+        "icon": "assets/create.png"
+      },
+      {
+        "command": "delete.trouble",
+        "title": "Delete Trouble",
+        "icon": "assets/delete.png"
+      },
+      {
+        "command": "refresh.trouble.list.without.login",
+        "title": "Trouble Shot : Refresh Without Login Trouble List",
+        "icon": "assets/refresh.png"
+      },
+      {
+        "command": "refresh.trouble.error.history",
+        "title": "Trouble Shot : Refresh Error History",
+        "icon": "assets/refresh.png"
+      },
+      {
+        "command": "node.dependencies.refreshEntry",
+        "title": "Trouble Shot : Refresh Node Dependencies",
+        "icon": "assets/refresh.png"
+      },
+      {
+        "command": "delete.error",
+        "title": "Delete Error",
+        "icon": "assets/delete.png"
+      },
+      {
+        "command": "clear.error",
+        "title": "Clear Error",
+        "icon": "assets/clear.png"
+      },
+      {
+        "command": "create.trouble.with.error",
+        "title": "Create Trouble With Error",
+        "icon": "assets/create_using_err.png"
+      },
+      {
+        "command": "refresh.trouble.list",
+        "title": "Trouble Shot : Refresh Trouble List",
+        "icon": "assets/refresh.png"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "trouble-shot",
+          "title": "Trouble Shot",
+          "icon": "assets/trous_favicon_white.png"
+        }
+      ]
+    },
+    "views": {
+      "trouble-shot": [
+        {
+          "id": "my-trouble-list-without-login",
+          "name": "My Trouble List Without Login",
+          "when": "!isLogin"
+        },
+        {
+          "id": "login-to-trouble-shot",
+          "name": "Login To Trouble Shot",
+          "when": "!isLogin"
+        },
+        {
+          "id": "my-trouble-list",
+          "name": "My Trouble List",
+          "when": "isLogin"
+        },
+        {
+          "id": "error-history",
+          "name": "Error History"
+        },
+        {
+          "id": "node-dependencies",
+          "name": "Node Dependencies"
+        },
+        {
+          "id": "more-info",
+          "name": "More Info"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "node.dependencies.refreshEntry",
+          "when": "view == node-dependencies",
+          "group": "navigation"
+        },
+        {
+          "command": "create.trouble",
+          "when": "view == my-trouble-list-without-login || view == my-trouble-list",
+          "group": "navigation"
+        },
+        {
+          "command": "refresh.trouble.list.without.login",
+          "when": "view == my-trouble-list-without-login",
+          "group": "navigation"
+        },
+        {
+          "command": "refresh.trouble.error.history",
+          "when": "view == error-history",
+          "group": "navigation"
+        },
+        {
+          "command": "clear.error",
+          "when": "view == error-history",
+          "group": "navigation"
+        },
+        {
+          "command": "refresh.trouble.list",
+          "when": "view == my-trouble-list",
+          "group": "navigation"
+        },
+        {
+          "command": "logout.trouble.shot",
+          "when": "view == my-trouble-list",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "solve.trouble",
+          "when": "viewItem == unSolved",
+          "group": "inline"
+        },
+        {
+          "command": "delete.trouble",
+          "when": "view == my-trouble-list-without-login || view == my-trouble-list",
+          "group": "inline"
+        },
+        {
+          "command": "copy.markdown",
+          "when": "view == my-trouble-list-without-login || view == my-trouble-list",
+          "group": "inline"
+        },
+        {
+          "command": "delete.error",
+          "when": "view == error-history",
+          "group": "inline"
+        },
+        {
+          "command": "create.trouble.with.error",
+          "when": "view == error-history",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "install:all": "npm install && cd webview-ui && npm install",
+    "start:webview": "cd webview-ui && npm run start",
+    "build:webview": "cd webview-ui && npm run build",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/node": "^12.11.7",
+    "@types/vscode": "^1.46.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "eslint": "^7.19.0",
+    "glob": "^7.1.6",
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.5.0"
+  },
+  "dependencies": {
+    "@types/uuid": "^9.0.6",
+    "@vscode/webview-ui-toolkit": "^1.2.2",
+    "marked": "^9.1.4",
+    "timeago.js": "^4.0.0-beta.3",
+    "uuid": "^9.0.1",
+    "vscode-webview": "^1.0.1-beta.1"
+  }
+}
